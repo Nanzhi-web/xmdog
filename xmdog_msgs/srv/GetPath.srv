@@ -1,0 +1,3 @@
+---
+bool success
+string path     # 返回 "slope" 或 "stone"
