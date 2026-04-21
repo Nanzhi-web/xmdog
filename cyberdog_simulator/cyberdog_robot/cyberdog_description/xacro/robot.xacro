@@ -2,7 +2,7 @@
 <robot name="cyber_dog" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <xacro:arg name="ROBOT" default="cyber_dog" />
-    <xacro:arg name="USE_LIDAR" default="true" />
+    <xacro:arg name="USE_LIDAR" default="false" />
     <xacro:include filename="const.xacro" />
     <xacro:include filename="leg.xacro" />
     <xacro:include filename="gazebo.xacro" />
@@ -85,7 +85,7 @@
     <joint name="D435_camera_joint" type="fixed">
         <parent link="body" />
         <child link="D435_camera_link" />
-        <origin rpy="0 0 0" xyz="271.994e-3 25e-3 114.912e-3" />
+        <origin rpy="0 1.0472 0" xyz="271.994e-3 25e-3 114.912e-3" />
     </joint>
 
     <link name="D435_camera_link">
