@@ -248,41 +248,94 @@
         <kp  value="50000.0"/>
         <kd  value="5000.0"/>
     </gazebo>
-
-    <!-- RGB Camera -->
-    <gazebo reference="RGB_camera_link">
-        <sensor type="camera" name="rgb camera">
+    <gazebo reference="D435_camera_link">
+        <sensor name="d435_sensor" type="depth">
             <always_on>true</always_on>
-            <update_rate>15.0</update_rate>
-            <camera name="rgb_camera">
-                <horizontal_fov>1.46608</horizontal_fov>
+            <visualize>true</visualize>
+            <update_rate>30.0</update_rate>
+            <camera name="camera">
+                <horizontal_fov>1.518</horizontal_fov>
                 <image>
-                    <width>320</width>
-                    <height>180</height>
+                    <width>640</width>
+                    <height>480</height>
                     <format>R8G8B8</format>
                 </image>
-                <distortion>
-                    <k1>0.0</k1>
-                    <k2>0.0</k2>
-                    <k3>0.0</k3>
-                    <p1>0.0</p1>
-                    <p2>0.0</p2>
-                    <center> 0.5 0.5 </center>
-                </distortion>
+                <clip>
+                    <near>0.1</near>
+                    <far>10.0</far>
+                </clip>
             </camera>
-            <plugin name="rgb_camera_plugin" filename="libgazebo_ros_camera.so">
+            <plugin name="cyberdog_d435_controller" filename="libgazebo_ros_camera.so">
                 <ros>
-                    <!--<namespace>stereo</namespace>-->
-                    <remapping>~/image_raw:=image_raw</remapping>
-                    <remapping>~/camera_info:=camera_info</remapping>
+                    <remapping>~/image_raw:=/camera/color/image_raw</remapping>
+                    <remapping>~/depth/image_raw:=/camera/depth/image_rect_raw</remapping>
+                    <remapping>~/points:=/camera/depth/color/points</remapping>
+                    <remapping>~/camera_info:=/camera/color/camera_info</remapping>
                 </ros>
-                <!--Set camera name. If empty, defaults to sensor name(i.e."sensor_name")-->
-                <camera_name>rgb_camera</camera_name>
-                <!--Set TFframe name. If empty, defaults to link name(i.e."link_name")-->
-                <frame_name>RGB_camera_link</frame_name>
-                <hack_baseline>0.2</hack_baseline>
+                <camera_name>camera</camera_name>
+                <frame_name>D435_camera_link</frame_name>
+                <min_depth>0.1</min_depth>
+                <max_depth>10.0</max_depth>
             </plugin>
         </sensor>
     </gazebo>
-
+    <gazebo reference="RGB_camera_link">
+        <sensor name="rgb_sensor" type="camera">
+            <always_on>true</always_on>
+            <update_rate>30.0</update_rate> <visualize>true</visualize> <camera name="rgb_head">
+                <horizontal_fov>1.3962634</horizontal_fov> <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format> </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+            <plugin name="rgb_camera_controller" filename="libgazebo_ros_camera.so">
+                <ros>
+                    <remapping>~/image_raw:=/image_raw</remapping>
+                    <remapping>~/camera_info:=/camera_info</remapping>
+                </ros>
+                <frame_name>RGB_camera_link</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+    <gazebo reference="AI_camera_link">
+        <sensor name="ai_camera_sensor" type="camera">
+            <always_on>true</always_on>
+            <update_rate>30.0</update_rate>
+            <visualize>true</visualize>
+            <camera name="ai_camera">
+                <horizontal_fov>1.3962634</horizontal_fov>
+                <image>
+                    <width>640</width>
+                    <height>480</height>
+                    <format>R8G8B8</format>
+                </image>
+                <clip>
+                    <near>0.02</near>
+                    <far>300</far>
+                </clip>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.007</stddev>
+                </noise>
+            </camera>
+            <plugin name="ai_camera_controller" filename="libgazebo_ros_camera.so">
+                <ros>
+                    <remapping>~/image_raw:=/ai_camera/image_raw</remapping>
+                    <remapping>~/camera_info:=/ai_camera/camera_info</remapping>
+                </ros>
+                <camera_name>ai_camera</camera_name>
+                <frame_name>AI_camera_link</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
 </robot>

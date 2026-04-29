@@ -16,6 +16,7 @@
   <depend>ament_index_python</depend>
   <depend>geometry_msgs</depend>
   <depend>gazebo_msgs</depend>
+  <depend>ultralytics</depend>
 
   <test_depend>pytest</test_depend>
 

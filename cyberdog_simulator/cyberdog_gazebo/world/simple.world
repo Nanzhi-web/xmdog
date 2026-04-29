@@ -4,9 +4,8 @@
 
         <physics type="ode">
             <max_step_size>0.001</max_step_size>
-            <real_time_factor>1.0</real_time_factor>
-            <real_time_update_rate>1100</real_time_update_rate>
-            <real_time>true</real_time>  <!-- 显式启用实时模式 -->
+            <real_time_factor>1</real_time_factor>
+            <real_time_update_rate>4000</real_time_update_rate>
             <gravity>0 0 -9.81</gravity>
             <ode>
                 <solver>

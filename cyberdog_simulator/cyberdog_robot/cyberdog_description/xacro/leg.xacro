@@ -226,7 +226,7 @@
                 </geometry>
                 <material name="orange" />
             </visual>
-            <collision>
+            <collision name="${name}_foot_collision">
                 <origin rpy="0 0 0" xyz="0 0 0" />
                 <geometry>
                     <sphere radius="${foot_radius}" />
